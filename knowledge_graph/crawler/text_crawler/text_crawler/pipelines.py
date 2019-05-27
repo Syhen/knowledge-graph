@@ -29,8 +29,8 @@ class MongoPipeline(object):
 
 class TextCrawlerPipeline(MongoPipeline):
     def process_item(self, item, spider):
-        if spider.__class__.name != 'baidubaike_lemma':
+        if spider.__class__.name != 'baidubaike_entity':
             return item
-        _id = "%s_%s" % (item['lemma_type_id'], item['lemma_id'])
-        self.mongo_db["lemmas"].update_one({"_id": _id}, {'$setOnInsert': item}, upsert=True)
+        _id = "%s_%s" % (item['entity_type_id'], item['entity_id'])
+        self.mongo_db["entities"].update_one({"_id": _id}, {'$setOnInsert': item}, upsert=True)
         return item

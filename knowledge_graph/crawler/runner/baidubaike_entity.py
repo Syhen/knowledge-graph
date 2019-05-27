@@ -33,9 +33,9 @@ class BaiduBaikeLemmaRunner(BaseRunner):
         )
         return response.json()['totalPage']
 
-    def run(self, lemma_type_id=75953, total_page=None):
+    def run(self, entity_type_id=75953, total_page=None):
         """
-        :param lemma_type_id: 75953: 医疗疾病, 75954: 药物, 75956: 中医药, 75955: 诊疗技术
+        :param entity_type_id: 75953: 医疗疾病, 75954: 药物, 75956: 中医药, 75955: 诊疗技术
         :param total_page: if None, all page will get
         :return:
         """
@@ -45,15 +45,15 @@ class BaiduBaikeLemmaRunner(BaseRunner):
             75956: '中医药',
             75955: '诊疗技术'
         }
-        lemma_type_name = mapping.get(lemma_type_id, None)
-        if not lemma_type_name:
-            raise ValueError("invalid lemma_type_id %s" % lemma_type_id)
+        entity_type_name = mapping.get(entity_type_id, None)
+        if not entity_type_name:
+            raise ValueError("invalid entity_type_id %s" % entity_type_id)
         if total_page is None:
-            total_page = self.get_total_page(lemma_type_id)
+            total_page = self.get_total_page(entity_type_id)
         for page in range(total_page):
             self.queue.push({
-                'lemma_type_id': lemma_type_id,
-                'lemma_type_name': lemma_type_name,
+                'entity_type_id': entity_type_id,
+                'entity_type_name': entity_type_name,
                 'url': self.URL,
                 'page': page
             })
@@ -63,5 +63,5 @@ class BaiduBaikeLemmaRunner(BaseRunner):
 if __name__ == '__main__':
     from knowledge_graph.pools import redis_connection
 
-    baidubaike_lemma_runner = BaiduBaikeLemmaRunner('lemma:baidubaike', redis_connection)
-    baidubaike_lemma_runner.run(lemma_type_id=75956, total_page=None)
+    baidubaike_lemma_runner = BaiduBaikeLemmaRunner('entity:baidubaike', redis_connection)
+    baidubaike_lemma_runner.run(entity_type_id=75953, total_page=None)

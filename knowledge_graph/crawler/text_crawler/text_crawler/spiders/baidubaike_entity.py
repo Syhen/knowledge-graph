@@ -12,34 +12,34 @@ import json
 import scrapy
 from scrapy.utils.project import get_project_settings
 
-from text_crawler.items import LemmaItem
+from text_crawler.items import EntityItem
 from text_crawler.spiders.base import BaseSpider
 
 
-class BaiduBaikeLemmasSpider(BaseSpider):
-    name = 'baidubaike_lemma'
-    redis_key = 'lemma:baidubaike'
+class BaiduBaikeEntitySpider(BaseSpider):
+    name = 'baidubaike_entity'
+    redis_key = 'entity:baidubaike'
 
     def make_request_from_data(self, data):
         """make request from redis data
-        must have lemma_type_id, lemma_type_name and page
+        must have entity_type_id, entity_type_name and page
         page: int. start from 0
-        lemma_type_id: int. entity type
-        lemma_type_name: str. entity type name
+        entity_type_id: int. entity type
+        entity_type_name: str. entity type name
         :param data: dict. redis data.
         :return:
         """
         data = json.loads(data)
-        must_have_keys = ('lemma_type_id', 'lemma_type_name', 'page')
+        must_have_keys = ('entity_type_id', 'entity_type_name', 'page')
         self._check_data_keys(must_have_keys, data)
         settings = get_project_settings()
-        url = data.pop('url', settings.get("BAIDU_BAIKE_LEMMA_DEFAULT_URL"))
+        url = data.pop('url', settings.get("BAIDU_BAIKE_entity_DEFAULT_URL"))
         body = {
             'limit': '24',
             'timeout': '3000',
             'filterTags': '[]',
-            'tagId': str(data['lemma_type_id']),
-            'fromLemma': 'false',
+            'tagId': str(data['entity_type_id']),
+            'fromentity': 'false',
             'contentLength': '40',
             'page': str(data.pop('page'))
         }
@@ -47,11 +47,12 @@ class BaiduBaikeLemmasSpider(BaseSpider):
 
     def parse(self, response):
         for i in json.loads(response.body)['lemmaList']:
-            item = LemmaItem()
+            item = EntityItem()
             item.update(response.meta['extra_data'])
-            item['lemma_id'] = i['lemmaId']
-            item['lemma_name'] = i['lemmaTitle']
-            item['lemma_url'] = i['lemmaUrl']
+            item['platform'] = 'baidubaike'
+            item['entity_id'] = i['lemmaId']
+            item['entity_name'] = i['lemmaTitle']
+            item['entity_url'] = i['lemmaUrl']
             item['created_at'] = datetime.now()
             item['updated_at'] = datetime.now()
             yield item

@@ -2,12 +2,20 @@
 import scrapy
 
 
-class LemmaItem(scrapy.Item):
+class EntityItem(scrapy.Item):
     platform = scrapy.Field()
-    lemma_type_id = scrapy.Field()
-    lemma_type_name = scrapy.Field()
-    lemma_id = scrapy.Field()
-    lemma_name = scrapy.Field()
-    lemma_url = scrapy.Field()
+    entity_type_id = scrapy.Field()
+    entity_type_name = scrapy.Field()
+    entity_id = scrapy.Field()
+    entity_name = scrapy.Field()
+    entity_url = scrapy.Field()
+    created_at = scrapy.Field()
+    updated_at = scrapy.Field()
+
+
+class TextItem(scrapy.Item):
+    platform = scrapy.Field()
+    entity_url = scrapy.Field()
+
     created_at = scrapy.Field()
     updated_at = scrapy.Field()
