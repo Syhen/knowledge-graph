@@ -14,8 +14,8 @@ from knowledge_graph.crawler.runner.base import BaseRunner
 class BaiduBaikeLemmaRunner(BaseRunner):
     URL = 'https://baike.baidu.com/wikitag/api/getlemmas'
 
-    def __init__(self, redis_key, redis_connection, mongo_db=None, query=None):
-        super(BaiduBaikeLemmaRunner, self).__init__(redis_key, redis_connection, mongo_db, query)
+    def __init__(self, redis_connection, redis_key='entity:baidubaike', mongo_db=None, query=None):
+        super(BaiduBaikeLemmaRunner, self).__init__(redis_connection, redis_key, mongo_db, query)
 
     def get_total_page(self, lemma_type_id):
         response = requests.post(
@@ -63,5 +63,5 @@ class BaiduBaikeLemmaRunner(BaseRunner):
 if __name__ == '__main__':
     from knowledge_graph.pools import redis_connection
 
-    baidubaike_lemma_runner = BaiduBaikeLemmaRunner('entity:baidubaike', redis_connection)
+    baidubaike_lemma_runner = BaiduBaikeLemmaRunner(redis_connection)
     baidubaike_lemma_runner.run(entity_type_id=75953, total_page=None)

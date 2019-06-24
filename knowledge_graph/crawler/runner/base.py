@@ -12,7 +12,7 @@ from hm_collections.queue.redis_queue import RedisSetQueue
 
 
 class BaseRunner(object):
-    def __init__(self, redis_key, redis_connection, mongo_db=None, query=None):
+    def __init__(self, redis_connection, redis_key, mongo_db=None, query=None):
         self.mongo_db = mongo_db
         self.queue = RedisSetQueue(redis_connection, redis_key, serializer=json)
         self.query = query or {}
