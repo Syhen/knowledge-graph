@@ -13,6 +13,10 @@ class Config(object):
 
     COL_LEMMAS = 'lemmas'
 
+    MONGO_URI = "mongodb://localhost:27017"
+    MONGO_AUTH = {}
+    MONGO_DB_NAME = "knowledge_graph"
+
 
 class DevelopmentConfig(Config):
     pass
