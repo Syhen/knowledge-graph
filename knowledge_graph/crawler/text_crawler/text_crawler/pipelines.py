@@ -34,3 +34,30 @@ class TextCrawlerPipeline(MongoPipeline):
         _id = "%s_%s" % (item['entity_type_id'], item['entity_id'])
         self.mongo_db["entities"].update_one({"_id": _id}, {'$setOnInsert': item}, upsert=True)
         return item
+
+
+class DrugListPipeline(MongoPipeline):
+    def process_item(self, item, spider):
+        if spider.__class__.name not in ("ask120_drugs", "xywy_drugs"):
+            return item
+        _id = "%s_%s" % (item["source_id"], item["drug_id"])
+        self.mongo_db["drugs_list"].update_one({"_id": _id}, {"$setOnInsert": item}, upsert=True)
+        return item
+
+
+class DiseaseListPipeline(MongoPipeline):
+    def process_item(self, item, spider):
+        if spider.__class__.name not in ("ask120_disease_list", "xywy_disease_list"):
+            return item
+        _id = "%s_%s" % (item["source_id"], item["disease_id"])
+        self.mongo_db["diseases_list"].update_one({"_id": _id}, {"$setOnInsert": item}, upsert=True)
+        return item
+
+
+class DiseaseDetailPipeline(MongoPipeline):
+    def process_item(self, item, spider):
+        if spider.__class__.name not in ("ask120_disease_detail", "xywy_disease_detail"):
+            return item
+        _id = "%s_%s" % (item["source_id"], item["disease_id"])
+        self.mongo_db["diseases_detail"].update_one({"_id": _id}, {"$set": item}, upsert=True)
+        return item

@@ -5,7 +5,7 @@ BOT_NAME = 'text_crawler'
 SPIDER_MODULES = ['text_crawler.spiders']
 NEWSPIDER_MODULE = 'text_crawler.spiders'
 
-# USER_AGENT = 'text_crawler (+http://www.yourdomain.com)'
+# USER_AGENT = ''
 
 ROBOTSTXT_OBEY = False
 
@@ -19,6 +19,8 @@ COOKIES_ENABLED = False
 
 ITEM_PIPELINES = {
     'text_crawler.pipelines.TextCrawlerPipeline': 300,
+    'text_crawler.pipelines.DrugListPipeline': 310,
+    'text_crawler.pipelines.DiseaseListPipeline': 320,
 }
 
 # AUTOTHROTTLE_START_DELAY = 5
