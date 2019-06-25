@@ -13,7 +13,7 @@ from knowledge_graph.crawler.runner.base import BaseRunner
 class ASK120DrugsListRunner(BaseRunner):
     URL = 'https://yp.120ask.com/search/0-0-{page}--0-0-0-0.html'
 
-    def __init__(self, redis_connection, redis_key='drugs:list:ask120', mongo_db=None, query=None):
+    def __init__(self, redis_connection, redis_key='drug:list:ask120', mongo_db=None, query=None):
         super(ASK120DrugsListRunner, self).__init__(redis_connection, redis_key, mongo_db, query)
 
     def _parse_total_page(self, text):
