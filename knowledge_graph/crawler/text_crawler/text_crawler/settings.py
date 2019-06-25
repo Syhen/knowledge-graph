@@ -20,6 +20,7 @@ COOKIES_ENABLED = False
 ITEM_PIPELINES = {
     'text_crawler.pipelines.TextCrawlerPipeline': 300,
     'text_crawler.pipelines.DrugListPipeline': 310,
+    'text_crawler.pipelines.DrugDetailPipeline': 315,
     'text_crawler.pipelines.DiseaseListPipeline': 320,
     'text_crawler.pipelines.DiseaseDetailPipeline': 330,
 }

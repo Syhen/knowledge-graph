@@ -30,6 +30,7 @@ class DrugsItem(scrapy.Item):
     drug_name = scrapy.Field()  # 名称
     drug_common_name = scrapy.Field()  # 通用名称
     drug_category = scrapy.Field()  # 分类
+    drug_sub_category = scrapy.Field()  # 次级分类
     drug_type = scrapy.Field()  # 类型
     drug_has_medical_insurance = scrapy.Field()  # 是否有医保
     # drug_price = scrapy.Field()  # 价格
@@ -44,10 +45,12 @@ class DrugsItem(scrapy.Item):
     drug_description = scrapy.Field()  # 适应症（描述）
     drug_adverse_reactions = scrapy.Field()  # 不良反应
     drug_ban = scrapy.Field()  # 禁忌
+    drug_relate_disease = scrapy.Field()  # 相关疾病
     drug_precautions = scrapy.Field()  # 注意事项
     drug_pregnant = scrapy.Field()  # 孕妇及哺乳期妇女用药
     drug_interaction = scrapy.Field()  # 互相作用
     created_at = scrapy.Field()  # 创建时间
+    updated_at = scrapy.Field()  # 更新时间
 
 
 class DiseaseItem(scrapy.Item):

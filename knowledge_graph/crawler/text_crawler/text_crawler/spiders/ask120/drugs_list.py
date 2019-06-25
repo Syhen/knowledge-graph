@@ -14,8 +14,8 @@ from text_crawler.spiders.base import BaseSpider
 
 
 class Ask120DrugsSpider(BaseSpider):
-    name = 'ask120_drugs_list'
-    redis_key = 'drugs:list:ask120'
+    name = 'ask120_drug_list'
+    redis_key = 'drug:list:ask120'
 
     def make_request_from_data(self, data):
         """make request from redis data
