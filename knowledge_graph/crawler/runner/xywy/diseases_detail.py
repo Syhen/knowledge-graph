@@ -20,7 +20,8 @@ class XYWYDiseaseDetailRunner(BaseRunner):
             "created_at": 0,
             "_id": 0,
             "updated_at": 0,
-            "disease_url": 0
+            "disease_url": 0,
+            "status": 0
         }
         diseases = self.mongo_db["diseases_list"].find(self.query, proj)
         return diseases
