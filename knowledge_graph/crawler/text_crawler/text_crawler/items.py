@@ -23,12 +23,14 @@ class TextItem(scrapy.Item):
 
 class DrugsItem(scrapy.Item):
     _id = scrapy.Field()  # 主键 {source_id}_{drug_id}
+    drug_title = scrapy.Field()  # 链接的标题，在没有药物名的时候保留
     source_id = scrapy.Field()  # 来源
     drug_id = scrapy.Field()  # 药品id
     drug_url = scrapy.Field()  # 药品url
     drug_img_url = scrapy.Field()  # 封面图
     drug_name = scrapy.Field()  # 名称
     drug_common_name = scrapy.Field()  # 通用名称
+    drug_product_name = scrapy.Field()  # 商品名称
     drug_category = scrapy.Field()  # 分类
     drug_sub_category = scrapy.Field()  # 次级分类
     drug_type = scrapy.Field()  # 类型
@@ -49,6 +51,7 @@ class DrugsItem(scrapy.Item):
     drug_precautions = scrapy.Field()  # 注意事项
     drug_pregnant = scrapy.Field()  # 孕妇及哺乳期妇女用药
     drug_interaction = scrapy.Field()  # 互相作用
+    drug_html = scrapy.Field()  # 药品页面源代码
     created_at = scrapy.Field()  # 创建时间
     updated_at = scrapy.Field()  # 更新时间
 
@@ -79,3 +82,17 @@ class DiseaseItem(scrapy.Item):
 
     updated_at = scrapy.Field()
     created_at = scrapy.Field()
+
+
+class SymptomItem(scrapy.Item):
+    _id = scrapy.Field()  # 主键 {source_id}_{symptom_id}
+    source_id = scrapy.Field()
+    symptom_id = scrapy.Field()
+    symptom_url = scrapy.Field()
+    symptom_body = scrapy.Field()
+    symptom_body_sub = scrapy.Field()
+    symptom_name = scrapy.Field()
+    symptom_description = scrapy.Field()
+
+    created_at = scrapy.Field()
+    updated_at = scrapy.Field()

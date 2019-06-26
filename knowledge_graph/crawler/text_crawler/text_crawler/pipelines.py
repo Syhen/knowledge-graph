@@ -38,7 +38,7 @@ class TextCrawlerPipeline(MongoPipeline):
 
 class DrugListPipeline(MongoPipeline):
     def process_item(self, item, spider):
-        if spider.__class__.name not in ("ask120_drug_list", "xywy_drug_list"):
+        if spider.__class__.name not in ("ask120_drug_list", "xywy_drug_list", "jd_drug_list"):
             return item
         _id = "%s_%s" % (item["source_id"], item["drug_id"])
         self.mongo_db["drugs_list"].update_one({"_id": _id}, {"$setOnInsert": item}, upsert=True)
