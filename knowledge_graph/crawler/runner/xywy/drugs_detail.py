@@ -12,6 +12,7 @@ class XYWYDrugDetailRunner(BaseRunner):
 
     def __init__(self, redis_connection, redis_key='drug:detail:xywy', mongo_db=None, query=None):
         super(XYWYDrugDetailRunner, self).__init__(redis_connection, redis_key, mongo_db, query)
+        self.query["source_id"] = "xywy"
 
     def _get_total_drugs(self):
         if self.mongo_db is None:
