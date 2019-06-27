@@ -7,6 +7,8 @@ NEWSPIDER_MODULE = 'text_crawler.spiders'
 
 # USER_AGENT = ''
 
+LOG_LEVEL = "ERROR"
+
 ROBOTSTXT_OBEY = False
 
 # CONCURRENT_REQUESTS = 32

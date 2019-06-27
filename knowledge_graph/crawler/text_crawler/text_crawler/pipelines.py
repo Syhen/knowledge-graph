@@ -47,7 +47,7 @@ class DrugListPipeline(MongoPipeline):
 
 class DrugDetailPipeline(MongoPipeline):
     def process_item(self, item, spider):
-        if spider.__class__.name not in ('ask120_drug_detail', 'xywy_drug_detail'):
+        if spider.__class__.name not in ('ask120_drug_detail', 'xywy_drug_detail', 'jd_drug_detail'):
             return item
         _id = "%s_%s" % (item["source_id"], item["drug_id"])
         self.mongo_db["drugs_detail"].update_one({"_id": _id}, {"$set": item}, upsert=True)
