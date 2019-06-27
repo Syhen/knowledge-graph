@@ -22,6 +22,7 @@ class TextItem(scrapy.Item):
 
 
 class DrugsItem(scrapy.Item):
+    """药品Item"""
     _id = scrapy.Field()  # 主键 {source_id}_{drug_id}
     drug_title = scrapy.Field()  # 链接的标题，在没有药物名的时候保留
     source_id = scrapy.Field()  # 来源
@@ -57,6 +58,7 @@ class DrugsItem(scrapy.Item):
 
 
 class DiseaseItem(scrapy.Item):
+    """疾病Item"""
     _id = scrapy.Field()  # 主键 {source_id}_{disease_id}
     source_id = scrapy.Field()  # 来源
     disease_body = scrapy.Field()  # 部位 如：头部
@@ -85,6 +87,7 @@ class DiseaseItem(scrapy.Item):
 
 
 class SymptomItem(scrapy.Item):
+    """症状Item"""
     _id = scrapy.Field()  # 主键 {source_id}_{symptom_id}
     source_id = scrapy.Field()
     symptom_id = scrapy.Field()
@@ -93,6 +96,26 @@ class SymptomItem(scrapy.Item):
     symptom_body_sub = scrapy.Field()
     symptom_name = scrapy.Field()
     symptom_description = scrapy.Field()
+
+    created_at = scrapy.Field()
+    updated_at = scrapy.Field()
+
+
+class CheckItem(scrapy.Item):
+    """检查Item"""
+    _id = scrapy.Field()  # 主键 {source_id}_{symptom_id}
+    source_id = scrapy.Field()
+    check_id = scrapy.Field()
+    check_url = scrapy.Field()
+    check_name = scrapy.Field()
+    check_description = scrapy.Field()
+    check_category = scrapy.Field()  # 专科分类，如：生长发育检查
+    check_item_category = scrapy.Field()  # 检查分类，如：血液检查
+    check_gender = scrapy.Field()  # 适用性别
+    check_need_fasting = scrapy.Field()  # 是否需要空腹
+    check_price = scrapy.Field()  # 参考价格
+    check_precautions = scrapy.Field()  # 注意事项
+    check_normal_range = scrapy.Field()  # 正常值
 
     created_at = scrapy.Field()
     updated_at = scrapy.Field()

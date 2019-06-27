@@ -72,3 +72,22 @@ class DiseaseDetailPipeline(MongoPipeline):
         self.mongo_db["diseases_detail"].update_one({"_id": _id}, {"$set": item}, upsert=True)
         self.mongo_db["diseases_list"].update_one({"_id": _id}, {"$set": {"status": 1}}, upsert=True)
         return item
+
+
+class CheckListPipeline(MongoPipeline):
+    def process_item(self, item, spider):
+        if spider.__class__.name not in ('xywy_check_list', ):
+            return item
+        _id = "%s_%s" % (item["source_id"], item["check_id"])
+        self.mongo_db["check_list"].update_one({"_id": _id}, {"$setOnInsert": item}, upsert=True)
+        return item
+
+
+class CheckDetailPipeline(MongoPipeline):
+    def process_item(self, item, spider):
+        if spider.__class__.name not in ('xywy_check_detail', ):
+            return item
+        _id = "%s_%s" % (item["source_id"], item["check_id"])
+        self.mongo_db["check_detail"].update_one({"_id": _id}, {"$set": item}, upsert=True)
+        self.mongo_db["check_list"].update_one({"_id": _id}, {"$set": {"status": 1}}, upsert=True)
+        return item

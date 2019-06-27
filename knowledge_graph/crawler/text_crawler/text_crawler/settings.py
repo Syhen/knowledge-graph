@@ -25,6 +25,8 @@ ITEM_PIPELINES = {
     'text_crawler.pipelines.DrugDetailPipeline': 315,
     'text_crawler.pipelines.DiseaseListPipeline': 320,
     'text_crawler.pipelines.DiseaseDetailPipeline': 330,
+    'text_crawler.pipelines.CheckListPipeline': 340,
+    'text_crawler.pipelines.CheckDetailPipeline': 350
 }
 
 # AUTOTHROTTLE_START_DELAY = 5
